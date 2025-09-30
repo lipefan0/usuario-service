@@ -32,12 +32,8 @@ data class UserEntity(
         TODO("Not yet implemented")
     }
 
-    override fun getPassword(): String? {
-        TODO("Not yet implemented")
-    }
+    override fun getPassword(): String = password
 
-    override fun getUsername(): String? {
-        TODO("Not yet implemented")
-    }
+    override fun getUsername(): String = email
 
 }
