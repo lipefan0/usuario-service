@@ -14,16 +14,17 @@ import java.util.Date
 class JwtTokenProvider(
     @Value("\${jwt.secret}")
     private val secret: String,
-    @Value("\${jwt.expiration-in-ms}")
+    @Value("\${jwt.expiration}")
     private val expirationInMs: Long
 ) {
-    private val key = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secret.toByteArray()))
+    private val key = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secret))
 
     fun generateToken(user: UserEntity): String {
         val now = Date()
         val expiryDate = Date(now.time + expirationInMs)
         return Jwts.builder()
             .subject(user.email)
+            .claim("userId", user.id)
             .issuedAt(now)
             .expiration(expiryDate)
             .signWith(key)
