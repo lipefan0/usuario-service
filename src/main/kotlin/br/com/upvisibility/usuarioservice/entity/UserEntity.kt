@@ -22,18 +22,23 @@ data class UserEntity(
     @Column(unique = true)
     val email: String,
 
-    val password: String,
+    val passwordHash: String,
 
     val createdAt: LocalDateTime,
 
     val updatedAt: LocalDateTime
 ): UserDetails {
-    override fun getAuthorities(): Collection<GrantedAuthority?>? {
-        TODO("Not yet implemented")
-    }
+    override fun getAuthorities(): Collection<GrantedAuthority?>? = null
+    override fun getPassword(): String = this.passwordHash
 
-    override fun getPassword(): String = password
+    override fun getUsername(): String = this.email
 
-    override fun getUsername(): String = email
+    override fun isAccountNonExpired(): Boolean = true
+
+    override fun isAccountNonLocked(): Boolean = true
+
+    override fun isCredentialsNonExpired(): Boolean = true
+
+    override fun isEnabled(): Boolean = true
 
 }
