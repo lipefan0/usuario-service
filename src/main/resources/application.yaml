@@ -13,5 +13,9 @@ spring:
     hibernate:
       ddl-auto: update
 
+jwt:
+  secret: ChaveSecretaSuperSeguraParaAssinarTokensJwtComPeloMenos256BitsDeTamanho
+  expiration: 3600000 # 1 hora em milissegundos
+
 server:
   port: 8083
